@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <title>SOA Home Automation</title>
+  <meta name="description" content="SOA Home Automation">
+
+  <style>
+    html, body, #app {
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    [hide="true"] {
+      display: none
+    }
+    #injection-error-title, #noscript-error {
+      color: darkred;
+    }
+  </style>
+</head>
+<body>
+  <noscript>
+    <p>
+      Script execution is disabled. 
+      You should still see a static version of the site..
+    </p>
+  </noscript>
+  <div id="injection-error-container" hide="true">
+    <h1 id="injection-error-title">
+      An unknown error occured while trying to load the page content. 
+      Please try reloading and if all else fails, try disabling javascript.
+    </h1>
+    <p></p>
+  </div>
+  <div id="app"></div>
+</body></html>
