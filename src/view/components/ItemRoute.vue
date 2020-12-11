@@ -66,7 +66,7 @@ export default defineComponent({
       try {
         return await props.typeInfo.getItemFn(serverConfig.value, id)
       } catch (err) {
-        if (err instanceof UnauthorizedException) {
+        if (err === UnauthorizedException.name) {
           ctx.emit("unauthorized")
         } else {
           throw err

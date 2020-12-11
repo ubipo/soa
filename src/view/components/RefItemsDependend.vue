@@ -33,7 +33,7 @@ export default defineComponent({
           })
         ))
       } catch (err) {
-        if (err instanceof UnauthorizedException) {
+        if (err === UnauthorizedException.name) {
           ctx.emit("unauthorized")
         } else {
           throw err

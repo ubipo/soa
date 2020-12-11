@@ -52,7 +52,7 @@ export default defineComponent({
         const editedItem = await props.typeInfo.editFn(serverConfig.value, props.id, props.partial);
         ctx.emit("edited", editedItem)
       } catch (err) {
-        if (err instanceof UnauthorizedException) {
+        if (err === UnauthorizedException.name) {
           ctx.emit("unauthorized")
         } else {
           throw err

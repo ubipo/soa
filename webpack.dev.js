@@ -3,8 +3,6 @@ const common = require('./webpack.common.js');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 
-
-
 const conf = merge(common('development'), {
   output: {
     publicPath: '/'

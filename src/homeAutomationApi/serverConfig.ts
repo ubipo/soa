@@ -33,4 +33,3 @@ export const serverConfig = ref(
 watch(serverConfig, () =>
   localStorage.setItem(SERVER_CONFIG_KEY, JSON.stringify(serverConfig.value))
 )
-
