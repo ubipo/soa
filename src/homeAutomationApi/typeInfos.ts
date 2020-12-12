@@ -1,5 +1,5 @@
 import TypeInfo from "../api/TypeInfo";
-import { getEntrance, getEntrances, createEntrance, editEntrance, getProduct, getProducts, createProduct, editProduct, getProductType, getProductTypes, createProductType, editProductType, createRemote, editRemote, getRemote, getRemotes, createCamera, editCamera, getCamera, getCameras, createHeating, editHeating, getHeating, getHeatings, createBlind, editBlind, getBlind, getBlinds } from "./crud";
+import { getEntrance, getEntrances, createEntrance, editEntrance, getProduct, getProducts, createProduct, editProduct, getProductType, getProductTypes, createProductType, editProductType, createRemote, editRemote, getRemote, getRemotes, createCamera, editCamera, getCamera, getCameras, createHeating, editHeating, getHeating, getHeatings, createBlind, editBlind, getBlind, getBlinds, deleteBlind, deleteCamera, deleteEntrance, deleteHeating, deleteProduct, deleteProductType, deleteRemote } from "./crud";
 import { Blind, BlindOut, BlindPartial, defaultBlind, blindToPartial } from "./model/blind";
 import { Camera, CameraOut, CameraPartial, defaultCamera, cameraToPartial } from "./model/camera";
 import { Entrance, EntranceOut, EntrancePartial, defaultEntrance, entranceToPartial } from "./model/entrance";
@@ -18,10 +18,12 @@ export const entranceTypeInfo: TypeInfo<Entrance, EntranceOut, EntrancePartial> 
     getItemsFn: getEntrances,
     createItemFn: createEntrance,
     editFn: editEntrance,
+    deleteFn: deleteEntrance,
     defaultItemFn: defaultEntrance,
     valueMappings: entranceValueMappings,
     relativeLinkFn: entrance => `/entrances/${entrance.slug}`,
     nameFn: entrance => entrance.name,
+    idFn: entrance => entrance.slug,
     toPartialFn: entranceToPartial,
 }
 
@@ -33,10 +35,12 @@ export const remoteTypeInfo: TypeInfo<Remote, RemoteOut, RemotePartial> = {
     getItemsFn: getRemotes,
     createItemFn: createRemote,
     editFn: editRemote,
+    deleteFn: deleteRemote,
     defaultItemFn: defaultRemote,
     valueMappings: remoteValueMappings,
     relativeLinkFn: remote => `/remotes/${remote.slug}`,
     nameFn: () => "Remote",
+    idFn: remote => remote.slug,
     toPartialFn: remoteToPartial,
 }
 
@@ -48,10 +52,12 @@ export const productTypeInfo: TypeInfo<Product, ProductOut, ProductPartial> = {
     getItemsFn: getProducts,
     createItemFn: createProduct,
     editFn: editProduct,
+    deleteFn: deleteProduct,
     defaultItemFn: defaultProduct,
     valueMappings: productValueMappings,
     relativeLinkFn: product => `/products/${product.id}`,
     nameFn: () => "Product",
+    idFn: product => product.id,
     toPartialFn: productToPartial,
 }
 
@@ -63,10 +69,12 @@ export const productTypeTypeInfo: TypeInfo<ProductType, ProductTypeOut, ProductT
     getItemsFn: getProductTypes,
     createItemFn: createProductType,
     editFn: editProductType,
+    deleteFn: deleteProductType,
     defaultItemFn: defaultProductType,
     valueMappings: productTypeValueMappings,
     relativeLinkFn: productType => `/product-types/${productType.id}`,
     nameFn: productType => productType.name,
+    idFn: productType => productType.id,
     toPartialFn: productTypeToPartial,
 }
 
@@ -78,10 +86,12 @@ export const cameraTypeInfo: TypeInfo<Camera, CameraOut, CameraPartial> = {
     getItemsFn: getCameras,
     createItemFn: createCamera,
     editFn: editCamera,
+    deleteFn: deleteCamera,
     defaultItemFn: defaultCamera,
     valueMappings: cameraValueMappings,
     relativeLinkFn: camera => `/cameras/${camera.id}`,
     nameFn: camera => camera.name,
+    idFn: camera => camera.id,
     toPartialFn: cameraToPartial,
 }
 
@@ -93,10 +103,12 @@ export const heatingTypeInfo: TypeInfo<Heating, HeatingOut, HeatingPartial> = {
     getItemsFn: getHeatings,
     createItemFn: createHeating,
     editFn: editHeating,
+    deleteFn: deleteHeating,
     defaultItemFn: defaultHeating,
     valueMappings: heatingValueMappings,
     relativeLinkFn: heating => `/heatings/${heating.id}`,
     nameFn: heating => heating.name,
+    idFn: heating => heating.id,
     toPartialFn: heatingToPartial,
 }
 
@@ -108,9 +120,11 @@ export const blindTypeInfo: TypeInfo<Blind, BlindOut, BlindPartial> = {
     getItemsFn: getBlinds,
     createItemFn: createBlind,
     editFn: editBlind,
+    deleteFn: deleteBlind,
     defaultItemFn: defaultBlind,
     valueMappings: blindValueMappings,
     relativeLinkFn: blind => `/blinds/${blind.id}`,
     nameFn: () => "Blind",
+    idFn: blind => blind.id,
     toPartialFn: blindToPartial,
 }

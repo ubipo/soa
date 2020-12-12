@@ -21,8 +21,12 @@
                 <EditItem
                   :refAllItemsMap="refItemsProps.refAllItemsMap"
                   :id="id" :partial="typeInfo.toPartialFn(getItemTask.last.value)"
-                  :typeInfo="typeInfo"
-                  :router="router" @edited="onEdited"
+                  :typeInfo="typeInfo" @edited="onEdited"
+                />
+                <h2>Delete</h2>
+                <DeleteItem
+                  :item="getItemTask.last.value" :typeInfo="typeInfo"
+                  @deleted="onDeleted"
                 /> 
               </template>
             </main>
@@ -38,6 +42,7 @@ import { computed, defineComponent, PropType, reactive, Ref, watch } from "vue"
 import { useAsyncTask, useSequentialTask } from "vue-concurrency"
 import Item from "./Item.vue";
 import EditItem from "./EditItem.vue";
+import DeleteItem from "./DeleteItem.vue";
 import RefItemsDependend from "./RefItemsDependend.vue";
 import { createToRefItemMap } from "../itemUtil";
 import { Router } from "vue-router";
@@ -66,8 +71,6 @@ export default defineComponent({
       try {
         return await props.typeInfo.getItemFn(serverConfig.value, id)
       } catch (err) {
-        console.error("Caught err: ", err)
-        console.error(UnauthorizedException)
         if (err instanceof UnauthorizedException) {
           ctx.emit("unauthorized")
         }
@@ -82,6 +85,10 @@ export default defineComponent({
       getItemTask.perform(props.id)
     }
 
+    const onDeleted = () => {
+      props.router.push(`/${props.typeInfo.urlSafePlural}`)
+    }
+
     const toRefItemMap = computed(() =>
       createToRefItemMap(props.typeInfo.valueMappings
     ))
@@ -89,16 +96,17 @@ export default defineComponent({
     return {
       getItemTask,
       onEdited,
+      onDeleted,
       tryAgain: () => getItemTask.perform(props.id),
       toRefItemMap
     }
   },
-  components: { Item, EditItem, RefItemsDependend }
+  components: { Item, EditItem, DeleteItem, RefItemsDependend }
 })
 </script>
 
 <style scoped>
-.item {
-  margin-bottom: 1rem;
+h2 {
+  margin-top: 2rem;
 }
 </style>

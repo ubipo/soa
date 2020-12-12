@@ -128,3 +128,22 @@ export function createEditFn<T, S>(
     return parser(json)
   }
 }
+
+export function createDeleteFn(
+  name: string,
+  path: string
+) {
+  return async function(serverConfig: ServerConfig, id: string) {
+    const res = await fetch(createRequest(
+      serverConfig, joinPathSegments(path, id), undefined, 'DELETE'
+    ))
+    if (res.status === 404) {
+      throw new NoSuchElementException(`${name} with id: ${id}`)
+    } else if (res.status === 401) {
+      throw new UnauthorizedException()
+    } else if (![200, 202, 204].includes(res.status)) {
+      const resText = await res.text()
+      throw new Exception(`HTTP error deleting ${name}: ${res.statusText}: ${resText}`)
+    }
+  }
+}

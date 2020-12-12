@@ -10,7 +10,7 @@
         </router-link>
         <h2>Zato server config</h2>
         <input class="baseUrl" type="text" v-model="baseUrl">
-        <button @click="onLoginClick">Set credentials</button>
+        <a href="#" @click="onLoginClick">Set credentials</a>
       </main>
     </div>
   </div>

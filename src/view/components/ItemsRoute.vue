@@ -11,6 +11,9 @@
                 <p>{{ getItemsTask.last.error.message }}</p>
                 <button @click="getItemsTask.perform">Try again</button>
               </div>
+              <div v-else-if="getItemsTask.last.value.length === 0">
+                <p>No {{ typeInfo.namePlural }}</p>
+              </div>
               <div v-else v-for="item in getItemsTask.last.value" :key="item.uuid">
                 <div>
                   <router-link :to="typeInfo.relativeLinkFn(item)">
@@ -66,8 +69,6 @@ export default defineComponent({
       try {
         return await props.typeInfo.getItemsFn(serverConfig.value)
       } catch (err) {
-        console.error("Caught err: ", err)
-        console.error(UnauthorizedException)
         if (err instanceof UnauthorizedException) {
           ctx.emit("unauthorized")
         }

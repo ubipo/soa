@@ -8,7 +8,7 @@
     <ItemInputs
       :item="item" :refAllItemsMap="refAllItemsMap" :typeInfo="typeInfo"
     />
-    <button type="submit">Create</button>
+    <button type="submit" class="btn btn-success">Create</button>
   </form>
 </template>
 
@@ -45,8 +45,6 @@ export default defineComponent({
         const createdItem = await props.typeInfo.createItemFn(serverConfig.value, item);
         ctx.emit("created", createdItem)
       } catch (err) {
-        console.error("Caught err: ", err)
-        console.error(UnauthorizedException)
         if (err instanceof UnauthorizedException) {
           ctx.emit("unauthorized")
         }

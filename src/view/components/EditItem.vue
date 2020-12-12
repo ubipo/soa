@@ -9,7 +9,7 @@
       <ItemInputs
         :item="partial" :refAllItemsMap="refAllItemsMap" :typeInfo="typeInfo"
       />
-      <button type="submit">Edit</button>
+      <button type="submit" class="btn btn-success">Edit</button>
     </form>
   </div>
 </template>
@@ -52,8 +52,6 @@ export default defineComponent({
         const editedItem = await props.typeInfo.editFn(serverConfig.value, props.id, props.partial);
         ctx.emit("edited", editedItem)
       } catch (err) {
-        console.error("Caught err: ", err)
-        console.error(UnauthorizedException)
         if (err instanceof UnauthorizedException) {
           ctx.emit("unauthorized")
         }

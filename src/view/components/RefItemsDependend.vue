@@ -33,8 +33,6 @@ export default defineComponent({
           })
         ))
       } catch (err) {
-        console.error("Caught err: ", err)
-        console.error(UnauthorizedException)
         if (err instanceof UnauthorizedException) {
           ctx.emit("unauthorized")
         }

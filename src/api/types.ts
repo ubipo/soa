@@ -8,6 +8,7 @@ export type ItemGetter<T> = (serverConfig: ServerConfig, id: string) => Promise<
 export type AllItemsGetter<T> = (serverConfig: ServerConfig) => Promise<T[]>
 export type ItemCreator<T, O> = (serverConfig: ServerConfig, outDto: O) => Promise<T>
 export type ItemEditor<T, P> = (serverConfig: ServerConfig, id: string, partial: P) => Promise<T>
+export type ItemDeletor = (serverConfig: ServerConfig, id: string) => Promise<void>
 export type DefaultItemFn<T> = (refAllItemsMap: RefAllItemsMap) => T
 export type ToPartialFn<T, P> = (item: T) => P
 
