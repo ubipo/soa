@@ -43,7 +43,7 @@ import { createToRefItemMap } from "../itemUtil";
 import { Router } from "vue-router";
 import TypeInfo from "@/api/TypeInfo";
 import { serverConfig } from "@/homeAutomationApi/serverConfig";
-import { UnauthorizedException } from "@/api/crud";
+import { UnauthorizedException } from "@/api/exceptions";
 
 
 export default defineComponent({
@@ -66,7 +66,9 @@ export default defineComponent({
       try {
         return await props.typeInfo.getItemFn(serverConfig.value, id)
       } catch (err) {
-        if (err.name === UnauthorizedException.name) {
+        console.error("Caught err: ", err)
+        console.error(UnauthorizedException)
+        if (err instanceof UnauthorizedException) {
           ctx.emit("unauthorized")
         }
         throw err

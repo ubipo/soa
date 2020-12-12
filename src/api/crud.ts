@@ -1,21 +1,8 @@
 import { Exception } from "@/exception";
 import { ServerConfig } from "@/homeAutomationApi/serverConfig";
 import { httpBasicAuthorizationHeader, joinPathSegments } from "@/util";
+import { NoSuchElementException, UnauthorizedException } from "./exceptions";
 
-
-export class NoSuchElementException extends Exception {
-  constructor(message: string) {
-    super(message)
-    this.name = "NoSuchElementException"
-  }
-}
-
-export class UnauthorizedException extends Exception {
-  constructor(message?: string) {
-    super(message)
-    this.name = "UnauthorizedException"
-  }
-}
 
 export function createRequest(
   serverConfig: ServerConfig, path: string,

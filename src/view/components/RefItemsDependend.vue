@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import { UnauthorizedException } from "@/api/crud"
+import { UnauthorizedException } from "@/api/exceptions"
 import { serverConfig } from "@/homeAutomationApi/serverConfig"
 import { computed, defineComponent, reactive, Ref, watch } from "vue"
 import { useAsyncTask, useSequentialTask } from "vue-concurrency"
@@ -33,7 +33,9 @@ export default defineComponent({
           })
         ))
       } catch (err) {
-        if (err.name === UnauthorizedException.name) {
+        console.error("Caught err: ", err)
+        console.error(UnauthorizedException)
+        if (err instanceof UnauthorizedException) {
           ctx.emit("unauthorized")
         }
         throw err

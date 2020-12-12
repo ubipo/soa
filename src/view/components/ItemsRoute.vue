@@ -47,7 +47,7 @@ import { createToRefItemMap } from "../itemUtil";
 import TypeInfo from "@/api/TypeInfo";
 import { GenericItem } from "@/api/types";
 import { serverConfig } from "@/homeAutomationApi/serverConfig";
-import { UnauthorizedException } from "@/api/crud";
+import { UnauthorizedException } from "@/api/exceptions";
 
 
 export default defineComponent({
@@ -66,7 +66,9 @@ export default defineComponent({
       try {
         return await props.typeInfo.getItemsFn(serverConfig.value)
       } catch (err) {
-        if (err.name === UnauthorizedException.name) {
+        console.error("Caught err: ", err)
+        console.error(UnauthorizedException)
+        if (err instanceof UnauthorizedException) {
           ctx.emit("unauthorized")
         }
         throw err

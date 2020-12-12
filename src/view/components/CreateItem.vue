@@ -23,7 +23,7 @@ import RefItemsDependend from "./RefItemsDependend.vue"
 import ItemInputs from "./ItemInputs.vue";
 import { useAsyncTask } from "vue-concurrency"
 import { serverConfig } from "@/homeAutomationApi/serverConfig"
-import { UnauthorizedException } from "@/api/crud"
+import { UnauthorizedException } from "@/api/exceptions"
 
 
 export default defineComponent({
@@ -45,7 +45,9 @@ export default defineComponent({
         const createdItem = await props.typeInfo.createItemFn(serverConfig.value, item);
         ctx.emit("created", createdItem)
       } catch (err) {
-        if (err.name === UnauthorizedException.name) {
+        console.error("Caught err: ", err)
+        console.error(UnauthorizedException)
+        if (err instanceof UnauthorizedException) {
           ctx.emit("unauthorized")
         }
         throw err
