@@ -45,11 +45,10 @@ export default defineComponent({
         const createdItem = await props.typeInfo.createItemFn(serverConfig.value, item);
         ctx.emit("created", createdItem)
       } catch (err) {
-        if (err === UnauthorizedException.name) {
+        if (err.name === UnauthorizedException.name) {
           ctx.emit("unauthorized")
-        } else {
-          throw err
         }
+        throw err
       }
     })
 

@@ -66,11 +66,10 @@ export default defineComponent({
       try {
         return await props.typeInfo.getItemFn(serverConfig.value, id)
       } catch (err) {
-        if (err === UnauthorizedException.name) {
+        if (err.name === UnauthorizedException.name) {
           ctx.emit("unauthorized")
-        } else {
-          throw err
         }
+        throw err
       }
     })
     watch(() => props.id, () => getItemTask.perform(props.id))
